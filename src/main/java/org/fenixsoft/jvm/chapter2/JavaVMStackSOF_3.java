@@ -3,13 +3,32 @@ package org.fenixsoft.jvm.chapter2;
 /**
  * VM: JDK 1.0.2, Sun Classic VM
  *
+ * 不用限制Xss
+ * <p>
+ * 增加 栈帧的本地变量表的长度
+ *
+ * <p>
+ * stack length:10
+ * Exception in thread "main" java.lang.StackOverflowError
+ *
  * @author zzm
  */
 public class JavaVMStackSOF_3 {
 
     private static int stackLength = 0;
 
+    public static void main(String[] args) {
+        try {
+            test();
+        } catch (Error e) {
+            System.out.println("stack length:" + stackLength);
+            throw e;
+        }
+    }
+
     public static void test() {
+        stackLength++;
+
         double unused1, unused2, unused3, unused4, unused5,
                 unused6, unused7, unused8, unused9, unused10,
                 unused11, unused12, unused13, unused14, unused15,
@@ -85,8 +104,6 @@ public class JavaVMStackSOF_3 {
                                 lan71 = lan72 = lan73 = lan74 = lan75 = lan76 = lan77 = lan78 = lan79 = lan80 = lan81 = lan82 = lan83 = lan84 = lan85 = lan86 = lan87 = lan88 = lan89 = lan90 =
                                         lan91 = lan92 = lan93 = lan94 = lan95 = lan96 = lan97 = lan98 = lan99 = lan100 = 1000000;
 
-        stackLength++;
-
         unused1 = unused2 = unused3 = unused4 = unused5 = unused6 = unused7 = unused8 = unused9 = unused10 = unused11 = unused12 = unused13 = unused14 = unused15 =
                 unused16 = unused17 = unused18 = unused19 = unused20 = unused21 = unused22 = unused23 = unused24 = unused25 = unused26 = unused27 = unused28 = unused29 = unused30 = unused31 = unused32 = unused33 = unused34 = unused35 = unused36 = unused37 = unused38 = unused39 = unused40 = unused41 = unused42 = unused43 = unused44 = unused45 =
                         unused46 = unused47 = unused48 = unused49 = unused50 = unused51 = unused52 = unused53 = unused54 = unused55 = unused56 = unused57 = unused58 = unused59 = unused60 = unused61 = unused62 = unused63 = unused64 = unused65 = unused66 = unused67 = unused68 = unused69 = unused70 =
@@ -114,13 +131,11 @@ public class JavaVMStackSOF_3 {
                 bing91, bing92, bing93, bing94, bing95,
                 bing96, bing97, bing98, bing99, bing100;
 
-
         bing1 = bing2 = bing3 = bing4 = bing5 = bing6 = bing7 = bing8 = bing9 = bing10 = bing11 = bing12 = bing13 = bing14 = bing15 =
                 bing16 = bing17 = bing18 = bing19 = bing20 = bing21 = bing22 = bing23 = bing24 = bing25 = bing26 = bing27 = bing28 = bing29 = bing30 = bing31 = bing32 = bing33 = bing34 = bing35 = bing36 = bing37 = bing38 = bing39 = bing40 = bing41 = bing42 = bing43 = bing44 = bing45 =
                         bing46 = bing47 = bing48 = bing49 = bing50 = bing51 = bing52 = bing53 = bing54 = bing55 = bing56 = bing57 = bing58 = bing59 = bing60 = bing61 = bing62 = bing63 = bing64 = bing65 = bing66 = bing67 = bing68 = bing69 = bing70 =
                                 bing71 = bing72 = bing73 = bing74 = bing75 = bing76 = bing77 = bing78 = bing79 = bing80 = bing81 = bing82 = bing83 = bing84 = bing85 = bing86 = bing87 = bing88 = bing89 = bing90 =
                                         bing91 = bing92 = bing93 = bing94 = bing95 = bing96 = bing97 = bing98 = bing99 = bing100 = 1000000;
-
 
         double wen1, wen2, wen3, wen4, wen5,
                 wen6, wen7, wen8, wen9, wen10,
@@ -143,7 +158,6 @@ public class JavaVMStackSOF_3 {
                 wen91, wen92, wen93, wen94, wen95,
                 wen96, wen97, wen98, wen99, wen100;
 
-
         wen1 = wen2 = wen3 = wen4 = wen5 = wen6 = wen7 = wen8 = wen9 = wen10 = wen11 = wen12 = wen13 = wen14 = wen15 =
                 wen16 = wen17 = wen18 = wen19 = wen20 = wen21 = wen22 = wen23 = wen24 = wen25 = wen26 = wen27 = wen28 = wen29 = wen30 = wen31 = wen32 = wen33 = wen34 = wen35 = wen36 = wen37 = wen38 = wen39 = wen40 = wen41 = wen42 = wen43 = wen44 = wen45 =
                         wen46 = wen47 = wen48 = wen49 = wen50 = wen51 = wen52 = wen53 = wen54 = wen55 = wen56 = wen57 = wen58 = wen59 = wen60 = wen61 = wen62 = wen63 = wen64 = wen65 = wen66 = wen67 = wen68 = wen69 = wen70 =
@@ -151,8 +165,8 @@ public class JavaVMStackSOF_3 {
                                         wen91 = wen92 = wen93 = wen94 = wen95 = wen96 = wen97 = wen98 = wen99 = wen100 = 1000000;
 
         try {
-            Thread.sleep(5000);
-            System.out.println("test(): ");
+            Thread.sleep(200);
+            System.out.println("test(): " + stackLength);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -160,12 +174,4 @@ public class JavaVMStackSOF_3 {
         test();
     }
 
-    public static void main(String[] args) {
-        try {
-            test();
-        } catch (Error e) {
-            System.out.println("stack length:" + stackLength);
-            throw e;
-        }
-    }
 }

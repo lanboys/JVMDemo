@@ -6,6 +6,10 @@ import java.util.List;
 /**
  * VM Args：-Xms5m -Xmx5m -XX:+HeapDumpOnOutOfMemoryError
  *
+ * java.lang.OutOfMemoryError: GC overhead limit exceeded
+ * Dumping heap to java_pid8672.hprof ...
+ * Heap dump file created [10057705 bytes in 0.040 secs]
+ *
  * @author zzm
  */
 public class HeapOOM {
